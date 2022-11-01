@@ -26,27 +26,29 @@ Z= -1.0* X.^(1/2).* sin(X) .* X2.^(1/2).* sin(X2);
  
 %REALIZANDO LA GRÁFICA
 %figure(1)
-h = figure();
+h = figure(1);
+minz=(min(Z)); %Para las etiquetas de los ejes 
+maxz=(max(Z)); %Para las etiquetas de los ejes 
+
 subplot(1,2,1)
-surfc(X,X2,Z)
-grid on, title('\bf f(x,y)'); shading interp;
-xlabel('\bf X'), ylabel('\bf Y'), zlabel('\bf Z');
-minz=min(min(Z));
-maxz=max(max(Z));
+surf (X,X2,Z) %Vista 3D
+grid on, title('z = - \surd{x} sen(x) * \surd{y} sen(y)  '); shading interp;
+xlabel('\bf x'), ylabel('\bf y'), zlabel('\bf z');
 axis([x1min x1max x2min x2max]);
-set(gca, 'FontSize', 16)
 axis('square')
 
 subplot(1,2,2)
-pcolor(X,X2,Z);
-grid on, title('\bf f(x,y)'); shading interp;
-xlabel('\bf X'), ylabel('\bf Y'), zlabel('\bf Z');
+pcolor(X,X2,Z); %Vista de planta, gráfica de la derecha 
+grid on, title('z = - \surd{x} sen(x) * \surd{y} sen(y)'); shading interp;
+xlabel('\bf x'), ylabel('\bf y'), zlabel('\bf z');
 axis([x1min x1max x2min x2max ]);
-
-escala=linspace(min(min(Z)), max(max(Z)) ,11);
-colorbar("yticklabel", escala,'ytick', escala, 'Fontsize', 12);
-set(gca, 'FontSize', 16)
 axis('square')
 
-%figure(2)
-%surface(X,X2,Z),shading interp;
+%Propiedades del colorbar 
+escala=linspace(min(min(Z)), max(max(Z)) ,8); %Límites y numéro de etiquetas 
+colorbar("yticklabel", escala,'ytick', escala, 'Fontsize', 9); 
+
+%Se guarda la imagen de la función Alpine 
+%Nota, se tuvo que ingresar la ruta completa (será distinta en Windows)
+print (h,'-dpng', '/media/rolio/Disco Local/Documentos/Portafolio/MinimosCon_AG_public/img/Alpine2.png');
+
